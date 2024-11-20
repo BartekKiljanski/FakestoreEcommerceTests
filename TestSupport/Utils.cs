@@ -2,17 +2,10 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using TechTalk.SpecFlow;
 
-namespace FakestoreEcommerceTests.Selenium
+
+namespace FakestoreEcommerceTests.TestSupport
 {
   
 
