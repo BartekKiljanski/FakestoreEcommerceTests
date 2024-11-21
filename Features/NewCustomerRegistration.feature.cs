@@ -76,21 +76,11 @@ namespace FakestoreEcommerceTests.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Rejestracja Nowego Klienta")]
         [NUnit.Framework.CategoryAttribute("smoke")]
-        [NUnit.Framework.TestCaseAttribute("user12@example.com", "Haslo.1234!", null)]
-        [NUnit.Framework.TestCaseAttribute("user23@example.com", "Haslo.4567!", null)]
-        [NUnit.Framework.TestCaseAttribute("user34@example.com", "Haslo.7890!", null)]
-        public void RejestracjaNowegoKlienta(string email, string haslo, string[] exampleTags)
+        public void RejestracjaNowegoKlienta()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "smoke"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("email", email);
-            argumentsOfScenario.Add("hasło", haslo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Rejestracja Nowego Klienta", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
     this.ScenarioInitialize(scenarioInfo);
@@ -109,13 +99,19 @@ namespace FakestoreEcommerceTests.Features
         testRunner.When("wybieram \"Moje konto\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Kiedy ");
 #line hidden
 #line 10
-        testRunner.And(string.Format("Podaję przy rejestracji {0}", email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "I ");
+        testRunner.Then("Wyłączam link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Wtedy ");
 #line hidden
 #line 11
-        testRunner.And(string.Format("Podaję przy rejestracji {0}", haslo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Oraz ");
+        testRunner.And("Wybieram pole \"email\" i wprowadzam losowy email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "I ");
 #line hidden
 #line 12
+        testRunner.And("Wybieram pole \"new-password\" i wprowadzam losowe hasło", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Oraz ");
+#line hidden
+#line 13
         testRunner.And("wybieram \"Zarejestruj się\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "I ");
+#line hidden
+#line 14
+        testRunner.Then("Znajduję się w edycji mojego konta i mam zakładkę \"Kokpit\".", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Wtedy ");
 #line hidden
             }
             this.ScenarioCleanup();

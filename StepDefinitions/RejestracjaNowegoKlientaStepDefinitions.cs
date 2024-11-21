@@ -13,8 +13,10 @@ namespace FakestoreEcommerceTests.StepDefinitions
 
         private readonly IWebDriver _driver;
         private readonly NewCustomerPageObject _customerPageObject;
+        private string _randomEmail;
+        private string _randomPassword;
 
-        public RejestracjaNowegoKlientaStepDefinitions(IWebDriver driver)
+		public RejestracjaNowegoKlientaStepDefinitions(IWebDriver driver)
         {
             _driver = driver;
             _customerPageObject = new NewCustomerPageObject(_driver);
@@ -23,34 +25,9 @@ namespace FakestoreEcommerceTests.StepDefinitions
         [Given(@"znajduje się na stronie FakeStore")]
         public void GivenZnajdujeSieNaStronieFakeStore()
         {
-            Console.WriteLine($"WebSitePage: {AppSettings.WebSitePage}");
             _customerPageObject.GoToWebsite();
         }
 
-
-
-        [When(@"wybieram <zakladka>")]
-        public void WhenWybieramZakladka(string myAccount)
-        {
-            _customerPageObject.SelectLabel(myAccount, 201);
-        }
-
-
-      
-        [When(@"Podaję przy rejestracji losowy email")]
-        public void WhenPodajePrzyRejestracjiLosowyEmail()
-        {
-            _randomEmail = Utils.GenerateRandomEmail();
-            _customerPageObject.EnterEmail(_randomEmail);
-        }
-
-        [When(@"Wybieram pole ""([^""]*)"" i Haslo\.(.*)!")]
-        public void WhenWybieramPoleIHaslo_(string password, int p1)
-        {
-            throw new PendingStepException();
-        }
-
-      
 
         [When(@"wybieram ""([^""]*)""")]
         public void WhenWybieram(string myAccount)
@@ -58,11 +35,46 @@ namespace FakestoreEcommerceTests.StepDefinitions
             _customerPageObject.SelectLabel(myAccount, 201);
         }
 
-        [Then(@"znajduję się w zakładce ""([^""]*)""")]
-        public void ThenZnajdujeSieWZakladce(string accountTab)
-        {
-            throw new PendingStepException();
-        }
+		[Then(@"Wyłączam link")]
+		public void ThenWylaczamLink()
+		{
+            _customerPageObject.DissmissLink();
+		}
 
-    }
+		[Then(@"Wybieram pole ""([^""]*)"" i wprowadzam losowy email")]
+		public void ThenWybieramPoleIWprowadzamLosowyEmail(string email)
+		{
+			_randomEmail = Utils.GenerateRandomEmail();
+
+			_customerPageObject.FillField(email, _randomEmail);
+		}
+
+		
+		[Then(@"Wybieram pole ""([^""]*)"" i wprowadzam asd(.*)dfsa!")]
+		public void ThenWybieramPoleIWprowadzamAsddfsa(string password, string hasło)
+		{
+			_customerPageObject.FillField(password, hasło);
+		}
+		[Then(@"Wybieram pole ""([^""]*)"" i wprowadzam losowe hasło")]
+		public void ThenWybieramPoleIWprowadzamLosoweHaslo(string password)
+		{
+
+			_randomPassword = Utils.GenerateRandomText(20);
+			_customerPageObject.FillField(password, _randomPassword);
+		}
+
+		[Then(@"wybieram ""([^""]*)""")]
+		public void ThenWybieram(string register)
+		{
+            _customerPageObject.SelectButton(register);
+		}
+
+		[Then(@"Znajduję się w edycji mojego konta i mam zakładkę ""([^""]*)""\.")]
+		public void ThenZnajdujeSieWEdycjiMojegoKontaIMamZakladke_(string kokpit)
+		{
+			_customerPageObject.IsTextVisible(kokpit);
+		}
+
+
+	}
 }

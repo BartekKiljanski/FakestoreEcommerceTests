@@ -776,7 +776,7 @@ public class Utils
                 /// </summary>
     public static string GenerateRandomText(int length)
     {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmabcdefghijklmnopqrstuvwxyz0123456789nopqrstuvwxyz";
         var random = new Random();
         return new string(Enumerable.Repeat(chars, length)
           .Select(s => s[random.Next(s.Length)]).ToArray());
@@ -853,13 +853,6 @@ public class Utils
     }
 
 
-    /*public static string ParseDateString(string dateString)
-            {
-                  DateTime parsedDate;
-                  bool isParsed = DateTime.TryParseExact(dateString, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate);
-                  return isParsed ? parsedDate.ToString("dd-MM-yyyy") : dateString;
-            }*/
-
     public static string ParseDateString(string dateString)
     {
         DateTime parsedDate;
@@ -872,14 +865,15 @@ public class Utils
         }
         return dateString;
     }
-    public static string GenerateRandomEmail()
-    {
-        var random = new Random();
-        const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-        var userEmail = new string(Enumerable.Repeat(chars, 10)
-            .Select(s => s[random.Next(s.Length)]).ToArray());
-        return $"{userEmail}@example.com";
-    }
+	public static string GenerateRandomEmail()
+	{
+		var random = new Random();
+		const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+		var userEmail = new string(Enumerable.Repeat(chars, 10)
+			.Select(s => s[random.Next(s.Length)]).ToArray());
+
+		return $"{userEmail}@example.com";
+	}
 
 
 

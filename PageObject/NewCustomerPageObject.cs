@@ -29,18 +29,31 @@ namespace FakestoreEcommerceTests.PageObject
             Utils.ForceClickElementWithMessage(_driver, By.XPath(_tab), Utils.TimeSpan15, $"Brak możliwości wybrania zakładki {_tab}", 3);
 
         }
-        string _kafelekAR = $"//mdb-card-body[.//span[contains(text(), '{submitAR}')]]//button[contains(text(), '{buttonText}')]";
-        Utils.ScrollToElementAndClickMessage(_driver, By.XPath(_kafelekAR), Utils.TimeSpan15, $"Nie znaleziono przycisku '{buttonText}' we wniosku WNIOSEK AKTYWNY RODZIC");
-        public void EnterEmail(string email)
-        {
-            var emailField = $"//input[@name='{email}']";
-            Utils.ScrollToElementAndClickMessage(_driver, By.XPath(_kafelekAR), Utils.TimeSpan15, $"Nie znaleziono przycisku '{buttonText}' we wniosku WNIOSEK AKTYWNY RODZIC");
-            var emailField =//input[@name='email']
-; // Upewnij się, że ID jest poprawne emailField.Clear(); emailField.SendKeys(email); } public void EnterPassword(string password) { var passwordField = _driver.FindElement(By.Id("password")); // Upewnij się, że ID jest poprawne passwordField.Clear(); passwordField.SendKeys(password); }
-        }
-        public void EnterPassword(string password)
-        {
-            var passwordField = _driver.FindElement(By.Id("password")); // Upewnij się, że ID jest poprawne passwordField.Clear(); passwordField.SendKeys(password); }
-        }
-    }
+		public void DissmissLink()
+		{
+			string _link = "//a[@class='woocommerce-store-notice__dismiss-link']";
+			Utils.ForceClickElementWithMessage(_driver, By.XPath(_link), Utils.TimeSpan15, $"Brak możliwośc zamkniecia linku {_link}", 3);
+
+		}
+		public bool IsTextVisible(string text)
+		{
+			string _textXPath = $"//a[text()='{text}']";
+			bool isVisible = Utils.FindVisibleElement(_driver, _textXPath, Utils.TimeSpan15, $"Brak elementu z tekstem: {text}");
+			return isVisible;
+		}
+
+
+		public void SelectButton(string button)
+		{
+			string _button = $"//button[@value='{button}']";
+			Utils.ForceClickElementWithMessage(_driver, By.XPath(_button), Utils.TimeSpan15, $"Brak możliwości wybrania przycisku {button}", 3);
+
+		}
+		public void FillField(string formAutocomplete, string optionText)
+		{
+			string _formAutocompleteXPath = $"//input[@autocomplete='{formAutocomplete}']";
+			Utils.ClearAndSendKeysByXPath(_driver, _formAutocompleteXPath, TimeSpan.FromSeconds(15), optionText, $"Nie można wejść w interakcję z polem {formAutocomplete}.");
+
+		}
+	}
 }
