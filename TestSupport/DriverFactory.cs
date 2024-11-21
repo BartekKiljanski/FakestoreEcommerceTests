@@ -11,40 +11,31 @@ namespace FakestoreEcommerceTests.TestSupport
 {
     public static class DriverFactory
 	{
-		public static IWebDriver GetDriver()
-		{
+        public static IWebDriver GetDriver()
+        {
             string driver = Helpers.AppSettings.Driver;
             Enum.TryParse(driver, out DriverName driverName);
-            IWebDriver webDriver; // Deklaracja zmiennej przed switch
-
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument("incognito");
+           // chromeOptions.AddArgument("--headless"); // Dodanie trybu headless
+            chromeOptions.AddArgument("--window-size=1920,1080");
 
-            switch (driverName)
+
+
+            IWebDriver webDriver = driverName switch
             {
-                case DriverName.Chrome:
-                    webDriver = new ChromeDriver(chromeOptions);
-                    break;
-                case DriverName.Firefox:
-                    webDriver = new FirefoxDriver();
-                    break;
-                case DriverName.Ie:
-                    webDriver = new InternetExplorerDriver();
-                    break;
-                default:
-                    webDriver = new ChromeDriver(chromeOptions);
-                    break;
-            }
-            webDriver.Manage().Window.Size = new System.Drawing.Size(2560, 1960);
-
+                DriverName.Chrome => new ChromeDriver(chromeOptions),
+                DriverName.Firefox => new FirefoxDriver(),
+                DriverName.Ie => new InternetExplorerDriver(),
+                _ => new ChromeDriver(chromeOptions),
+            };
+            webDriver.Manage().Cookies.DeleteAllCookies();
             return webDriver;
         }
-       
-	}
+    }
 
-	public enum DriverName
-	{
-		Chrome, Firefox, Ie
-	}
-
+    public enum DriverName
+    {
+        Chrome, Firefox, Ie
+    }
 }

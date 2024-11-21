@@ -2,23 +2,12 @@
 using Microsoft.Extensions.Configuration.Json;
 
 using System.IO;
-
+using Microsoft.Extensions.Configuration;
 
 namespace FakestoreEcommerceTests.Helpers
 {
     public class ConfigurationHelper
     {
-        // Definicje właściwości dla ustawień
-        public string WebSitePage { get; set; }
-        public string Driver { get; set; }
-
-        private static IConfigurationRoot _configurationRoot;
-
-        static ConfigurationHelper()
-        {
-            _configurationRoot = GetIConfigurationRoot(Directory.GetCurrentDirectory());
-        }
-
         public static IConfigurationRoot GetIConfigurationRoot(string outputPath)
         {
             return new ConfigurationBuilder()
@@ -27,12 +16,10 @@ namespace FakestoreEcommerceTests.Helpers
                 .Build();
         }
 
-        public static ConfigurationHelper GetApplicationConfiguration()
+        public static IConfigurationRoot GetApplicationConfiguration(string outputPath)
         {
-            var configuration = new ConfigurationHelper();
-            _configurationRoot
-                .GetSection("AppSettings").Bind(configuration);
-            return configuration;
+            var iConfig = GetIConfigurationRoot(outputPath);
+            return iConfig;
         }
     }
 }

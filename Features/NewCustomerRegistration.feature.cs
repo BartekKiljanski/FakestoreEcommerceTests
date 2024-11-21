@@ -20,26 +20,22 @@ namespace FakestoreEcommerceTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Calculator")]
-    public partial class CalculatorFeature
+    [NUnit.Framework.DescriptionAttribute("Rejestracja Nowego Klienta")]
+    public partial class RejestracjaNowegoKlientaFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "Calculator.feature"
+#line 1 "NewCustomerRegistration.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Calculator", @"![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
-Simple calculator for adding **two** numbers
-
-Link to a feature: [Calculator](FakestoreEcommerceTests/Features/Calculator.feature)
-***Further read***: **[Learn more about how to generate Living Documentation](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html)**", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pl"), "Features", "Rejestracja Nowego Klienta", null, ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -78,16 +74,26 @@ Link to a feature: [Calculator](FakestoreEcommerceTests/Features/Calculator.feat
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Add two numbers")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public void AddTwoNumbers()
+        [NUnit.Framework.DescriptionAttribute("Rejestracja Nowego Klienta")]
+        [NUnit.Framework.CategoryAttribute("smoke")]
+        [NUnit.Framework.TestCaseAttribute("user12@example.com", "Haslo.1234!", null)]
+        [NUnit.Framework.TestCaseAttribute("user23@example.com", "Haslo.4567!", null)]
+        [NUnit.Framework.TestCaseAttribute("user34@example.com", "Haslo.7890!", null)]
+        public void RejestracjaNowegoKlienta(string email, string haslo, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
+            string[] @__tags = new string[] {
+                    "smoke"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 9
-this.ScenarioInitialize(scenarioInfo);
+            argumentsOfScenario.Add("email", email);
+            argumentsOfScenario.Add("hasło", haslo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Rejestracja Nowego Klienta", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 7
+    this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
@@ -96,17 +102,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 8
+        testRunner.Given("znajduje się na stronie FakeStore", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Zakładając, że ");
+#line hidden
+#line 9
+        testRunner.When("wybieram \"Moje konto\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Kiedy ");
+#line hidden
 #line 10
- testRunner.Given("the first number is 50", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.And(string.Format("Podaję przy rejestracji {0}", email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "I ");
 #line hidden
 #line 11
- testRunner.And("the second number is 70", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And(string.Format("Podaję przy rejestracji {0}", haslo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Oraz ");
 #line hidden
 #line 12
- testRunner.When("the two numbers are added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 13
- testRunner.Then("the result should be 120", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.And("wybieram \"Zarejestruj się\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "I ");
 #line hidden
             }
             this.ScenarioCleanup();
