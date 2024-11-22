@@ -1,5 +1,4 @@
-using System;
-using FakestoreEcommerceTests.Helpers;
+
 using FakestoreEcommerceTests.PageObject;
 using FakestoreEcommerceTests.TestSupport;
 using OpenQA.Selenium;
@@ -28,7 +27,6 @@ namespace FakestoreEcommerceTests.StepDefinitions
             _customerPageObject.GoToWebsite();
         }
 
-
         [When(@"wybieram ""([^""]*)""")]
         public void WhenWybieram(string myAccount)
         {
@@ -45,22 +43,15 @@ namespace FakestoreEcommerceTests.StepDefinitions
 		public void ThenWybieramPoleIWprowadzamLosowyEmail(string email)
 		{
 			_randomEmail = Utils.GenerateRandomEmail();
-
-			_customerPageObject.FillField(email, _randomEmail);
+			_customerPageObject.FillField("autocomplete", email, _randomEmail);
 		}
 
 		
-		[Then(@"Wybieram pole ""([^""]*)"" i wprowadzam asd(.*)dfsa!")]
-		public void ThenWybieramPoleIWprowadzamAsddfsa(string password, string hasło)
-		{
-			_customerPageObject.FillField(password, hasło);
-		}
 		[Then(@"Wybieram pole ""([^""]*)"" i wprowadzam losowe hasło")]
 		public void ThenWybieramPoleIWprowadzamLosoweHaslo(string password)
 		{
-
 			_randomPassword = Utils.GenerateRandomText(20);
-			_customerPageObject.FillField(password, _randomPassword);
+			_customerPageObject.FillField("autocomplete",password, _randomPassword);
 		}
 
 		[Then(@"wybieram ""([^""]*)""")]
@@ -72,7 +63,7 @@ namespace FakestoreEcommerceTests.StepDefinitions
 		[Then(@"Znajduję się w edycji mojego konta i mam zakładkę ""([^""]*)""\.")]
 		public void ThenZnajdujeSieWEdycjiMojegoKontaIMamZakladke_(string kokpit)
 		{
-			_customerPageObject.IsTextVisible(kokpit);
+			_customerPageObject.IsElementVisible("a", kokpit);
 		}
 
 

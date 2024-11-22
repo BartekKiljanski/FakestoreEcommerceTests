@@ -35,13 +35,13 @@ namespace FakestoreEcommerceTests.PageObject
 			Utils.ForceClickElementWithMessage(_driver, By.XPath(_link), Utils.TimeSpan15, $"Brak możliwośc zamkniecia linku {_link}", 3);
 
 		}
-		public bool IsTextVisible(string text)
+		public bool IsElementVisible(string elementType, string text)
 		{
-			string _textXPath = $"//a[text()='{text}']";
+			string _textXPath = $"//{elementType}[text()='{text}']";
 			bool isVisible = Utils.FindVisibleElement(_driver, _textXPath, Utils.TimeSpan15, $"Brak elementu z tekstem: {text}");
 			return isVisible;
 		}
-
+		
 
 		public void SelectButton(string button)
 		{
@@ -49,11 +49,11 @@ namespace FakestoreEcommerceTests.PageObject
 			Utils.ForceClickElementWithMessage(_driver, By.XPath(_button), Utils.TimeSpan15, $"Brak możliwości wybrania przycisku {button}", 3);
 
 		}
-		public void FillField(string formAutocomplete, string optionText)
-		{
-			string _formAutocompleteXPath = $"//input[@autocomplete='{formAutocomplete}']";
-			Utils.ClearAndSendKeysByXPath(_driver, _formAutocompleteXPath, TimeSpan.FromSeconds(15), optionText, $"Nie można wejść w interakcję z polem {formAutocomplete}.");
 
+		public void FillField(string attributeType, string attributeValue, string optionText)
+		{
+			string _fieldXPath = $"//input[@{attributeType}='{attributeValue}']";
+			Utils.ClearAndSendKeysByXPath(_driver, _fieldXPath, TimeSpan.FromSeconds(15), optionText, $"Nie można wejść w interakcję z polem {attributeValue}.");
 		}
 	}
 }
