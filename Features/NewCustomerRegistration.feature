@@ -7,13 +7,10 @@ Właściwość: Rejestracja Nowego Klienta
     Scenariusz: Rejestracja Nowego Klienta
         Zakładając, że znajduje się na stronie FakeStore
         Kiedy wybieram "Moje konto"
-        I Podaję przy rejestracji losowy email
-        Oraz Wybieram pole "password" i <hasło>
+        Wtedy Wyłączam link 
+        I Wybieram pole "email" i wprowadzam losowy email
+        Oraz Wybieram pole "new-password" i wprowadzam losowe hasło
         I wybieram "Zarejestruj się"
+        Wtedy Znajduję się w edycji mojego konta i mam zakładkę "Kokpit".
         
 
-    Przykłady:
-           | hasło             |
-           | Haslo.1234!       |
-           | Haslo.4567!       |
-           | Haslo.7890!       |
