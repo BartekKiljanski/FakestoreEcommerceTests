@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-
 using System.IO;
-using Microsoft.Extensions.Configuration;
 
 namespace FakestoreEcommerceTests.Helpers
 {

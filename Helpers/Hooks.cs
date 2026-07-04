@@ -1,12 +1,9 @@
 ﻿using Allure.Net.Commons;
-
 using BoDi;
 using FakestoreEcommerceTests.TestSupport;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace FakestoreEcommerceTests.Helpers
@@ -16,7 +13,7 @@ namespace FakestoreEcommerceTests.Helpers
     public class Hooks
     {
         private readonly IObjectContainer _container;
-        private IWebDriver _driver;
+        private IWebDriver? _driver;
         private readonly ScenarioContext _scenarioContext;
 
         public Hooks(IObjectContainer container, ScenarioContext scenarioContext)
@@ -54,9 +51,7 @@ namespace FakestoreEcommerceTests.Helpers
                     var screenshotFilePath = Path.Combine("Screenshots", $"{title}-{stepTitle}_{timestamp}.png");
 
                     TakeScreenshot(_driver, screenshotFilePath);
-
-                    // Dodanie zrzutu ekranu do raportu Allure
-                   // AllureLifecycle.Instance.AddAttachment(screenshotFilePath, "image/png");
+                    AllureApi.AddAttachment(stepTitle, "image/png", screenshotFilePath);
 
                     Console.WriteLine($"Zrzut ekranu dla '{stepTitle}' zapisany do: {screenshotFilePath}");
                 }
@@ -74,7 +69,7 @@ namespace FakestoreEcommerceTests.Helpers
                 var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
                 var artifactDirectory = Path.GetDirectoryName(filePath);
 
-                if (!Directory.Exists(artifactDirectory))
+                if (!string.IsNullOrEmpty(artifactDirectory) && !Directory.Exists(artifactDirectory))
                 {
                     Directory.CreateDirectory(artifactDirectory);
                 }
@@ -102,11 +97,11 @@ namespace FakestoreEcommerceTests.Helpers
             {
                 try
                 {
-                    var screenshot = ((ITakesScreenshot)_driver).GetScreenshot();
                     var title = _scenarioContext.ScenarioInfo.Title;
                     var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
                     var screenshotFilePath = Path.Combine("Screenshots", $"{title}_{timestamp}.png");
-                    screenshot.SaveAsFile(screenshotFilePath);
+                    TakeScreenshot(_driver, screenshotFilePath);
+                    AllureApi.AddAttachment(title, "image/png", screenshotFilePath);
                     Console.WriteLine($"Zapisz screenshot do: {screenshotFilePath}");
                 }
                 catch (Exception ex)

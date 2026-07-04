@@ -1,0 +1,11 @@
+services:
+  tests:
+    build:
+      context: .
+    environment:
+      HEADLESS: "true"
+    volumes:
+      - ./allure-results:/tests/allure-results
+      - ./Screenshots:/tests/Screenshots
+    shm_size: "2gb"
+
